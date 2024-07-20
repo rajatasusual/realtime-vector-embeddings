@@ -7,7 +7,7 @@ This project is created to understand how similar different pieces of text are i
 
 ![Visualization](./assets/visual.png)
 
-> This project is part of ![llamapp](www.github.com/rajatasusual/llamapp)
+> This project is part of [llamapp](www.github.com/rajatasusual/llamapp)
 
 ## Purpose
 
