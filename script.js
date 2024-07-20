@@ -79,17 +79,48 @@ async function submitText() {
 
 function updateQueryList() {
     const queryList = document.getElementById('queryList');
+    const sortOption = document.getElementById('sortOptions').value;
     queryList.style.display = 'block';
 
+    // Calculate similarities if needed
+    let similarities = [];
+    if (selectedQueryIndex !== -1) {
+        similarities = queries.map((query, index) => {
+            if (index !== selectedQueryIndex) {
+                return calculateCosineSimilarity(queries[selectedQueryIndex].embedding, query.embedding);
+            }
+            return null;
+        });
+    }
+
+    // Sort queries
+    let sortedQueries = queries.map((query, index) => ({ query, index }));
+    if (sortOption === 'similarity' && selectedQueryIndex !== -1) {
+        sortedQueries = sortedQueries.sort((a, b) => {
+            if (a.index === selectedQueryIndex) return -1;
+            if (b.index === selectedQueryIndex) return 1;
+            return similarities[b.index] - similarities[a.index];
+        });
+    } else {
+        sortedQueries = sortedQueries.sort((a, b) => a.index - b.index);
+    }
+
+    // Build query list
     queryList.innerHTML = '';
-    queries.forEach((query, index) => {
+    sortedQueries.forEach(({ query, index }) => {
         const queryItem = document.createElement('div');
         queryItem.className = 'query-item';
         if (index === selectedQueryIndex) {
             queryItem.classList.add('selected');
         }
 
-        queryItem.innerText = `${index + 1}. ${query.text}`;
+        let similarityText = '';
+        if (selectedQueryIndex !== -1 && index !== selectedQueryIndex) {
+            const similarity = similarities[index];
+            similarityText = ` (Cosine Similarity: ${similarity.toFixed(2)})`;
+        }
+
+        queryItem.innerText = `${index + 1}. ${query.text}${similarityText}`;
         queryItem.onclick = () => selectQuery(index);
 
         queryList.appendChild(queryItem);

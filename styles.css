@@ -119,7 +119,7 @@ button:hover {
 }
 
 .status-message {
-    color: #35A1CB;
+    color: #FFC995;
     margin: 10px 0;
     font-size: 14px;
 }
@@ -127,7 +127,9 @@ button:hover {
 .query-list {
     margin-top: 20px;
     overflow-y: auto;
-    max-height: 200px;
+    max-height: 256px;
+    max-width: 400px;
+    overflow-x: hidden;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     padding: 10px;
@@ -139,6 +141,9 @@ button:hover {
     margin: 5px 0;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .query-item:hover {

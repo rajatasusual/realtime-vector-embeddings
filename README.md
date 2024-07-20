@@ -104,7 +104,9 @@ console.log(`Cosine Similarity: ${similarity.toFixed(2)}`); // Output: Cosine Si
    npm start
    ```
 
-2. Open your browser and navigate to `http://localhost:3000`.
+   This will start the server with the default port 3000.
+
+2. Open index.html.
 
 3. Use the input field to type text and click "Submit" to generate vector embeddings. The results will be displayed on the graph, and you can interact with it to view similarities.
 

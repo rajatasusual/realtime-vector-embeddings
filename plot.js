@@ -54,6 +54,10 @@ function renderPlot(queries, selectedQueryIndex) {
         plot_bgcolor: 'rgba(0,0,0,0)',
         font: {
             color: '#1A2A73'
+        },
+        legend: {
+            orientation: 'h', // Horizontal orientation for the legend
+            y: -0.2 // Positioning the legend below the plot
         }
     };
 

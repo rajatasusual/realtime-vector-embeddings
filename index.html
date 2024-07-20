@@ -23,6 +23,13 @@
             <input type="text" id="inputText" placeholder="Type your text here..." onkeydown="checkEnter(event)" />
             <button onclick="submitText()" id="submitButton">Submit</button>
             <div id="statusMessage" class="status-message"></div>
+            <div>
+                <label for="sortOptions">Sort By:</label>
+                <select id="sortOptions" onchange="updateQueryList()">
+                    <option value="index">Index</option>
+                    <option value="similarity">Cosine Similarity</option>
+                </select>
+            </div>
             <div id="queryList" class="query-list"></div>
         </div>
         <div id="plot"></div>
