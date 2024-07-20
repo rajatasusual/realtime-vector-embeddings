@@ -1,8 +1,24 @@
-function renderPlot(queries, selectedQueryIndex) {
+function renderPlot(queries, selectedQueryIndex, smooth) {
+    const smoothData = (data, windowSize) => {
+        const smoothed = [];
+        for (let i = 0; i < data.length; i++) {
+            const start = Math.max(0, i - Math.floor(windowSize / 2));
+            const end = Math.min(data.length, i + Math.floor(windowSize / 2) + 1);
+            const window = data.slice(start, end);
+            const average = window.reduce((sum, val) => sum + val, 0) / window.length;
+            smoothed.push(average);
+        }
+        return smoothed;
+    };
+
+    const windowSize = 10; // Adjust the window size as needed for more or less smoothing
+
     const data = queries.map((query, index) => {
+        const embedding = smooth ? smoothData(query.embedding, windowSize) : query.embedding;
+
         const trace = {
-            x: query.embedding.map((_, idx) => idx),
-            y: query.embedding,
+            x: embedding.map((_, idx) => idx),
+            y: embedding,
             type: 'scatter',
             mode: 'lines+markers',
             name: `Query ${index + 1}`,
@@ -61,7 +77,7 @@ function renderPlot(queries, selectedQueryIndex) {
         }
     };
 
-    return {data, layout};
+    return { data, layout };
 }
 
 function calculateCosineSimilarity(vec1, vec2) {

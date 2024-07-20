@@ -56,8 +56,9 @@ async function submitText() {
         queries.push({ text: inputText, embedding: result.embedding });
         updateQueryList();
 
-        const { data, layout } = renderPlot(queries, selectedQueryIndex);
-        Plotly.newPlot('plot', data, layout);
+        const { data, layout } = renderPlot(queries, selectedQueryIndex,
+            document.getElementById('smoothCheckbox').checked);
+        Plotly.react('plot', data, layout);
 
         document.getElementById('inputText').value = ''; // Clear input field
     } catch (error) {
@@ -135,13 +136,23 @@ function selectQuery(index) {
     }
     updateQueryList();
 
-    const { data, layout } = renderPlot(queries, selectedQueryIndex);
-    Plotly.newPlot('plot', data, layout);
+    const { data, layout } = renderPlot(queries, selectedQueryIndex,
+        document.getElementById('smoothCheckbox').checked);
+    Plotly.react('plot', data, layout);
+}
+
+function updatePlot() {
+    const smoothCheckbox = document.getElementById('smoothCheckbox').checked;
+
+    const { data, layout } = renderPlot(queries, selectedQueryIndex,
+        smoothCheckbox);
+    Plotly.react('plot', data, layout);
 }
 
 // Initial blank plot
 window.onload = () => {
-    const { data, layout } = renderPlot(queries, selectedQueryIndex);
+    const { data, layout } = renderPlot(queries, selectedQueryIndex,
+        document.getElementById('smoothCheckbox').checked);
     Plotly.newPlot('plot', data, layout);
 
 };

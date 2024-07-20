@@ -124,6 +124,13 @@ button:hover {
     font-size: 14px;
 }
 
+.options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
 .query-list {
     margin-top: 20px;
     overflow-y: auto;

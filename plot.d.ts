@@ -6,7 +6,7 @@
  * @param selectedQueryIndex - The index of the currently selected query, or -1 if none.
  * @returns An object containing `data` and `layout` for the Plotly plot.
  */
-declare function renderPlot(queries: { text: string; embedding: number[] }[], selectedQueryIndex: number): { data: any[], layout: any };
+declare function renderPlot(queries: { text: string; embedding: number[] }[], selectedQueryIndex: number, smoothData: boolean = false): { data: any[], layout: any };
 
 /**
  * Calculates the cosine similarity between two vectors.

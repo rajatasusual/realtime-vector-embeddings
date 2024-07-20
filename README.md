@@ -49,6 +49,34 @@ const similarity = calculateCosineSimilarity(vectorA, vectorB);
 console.log(`Cosine Similarity: ${similarity.toFixed(2)}`); // Output: Cosine Similarity: 0.9746
 ```
 
+## Smoothing Function
+
+When visualizing vector embeddings, especially when they contain a large number of items, the graph can become too clustered and difficult to interpret. To address this, a smoothing function is used.
+
+### Purpose of Smoothing
+
+The smoothing function helps in reducing the noise in the data by averaging the values over a specified window size. This makes the graph more readable and allows for better visualization of the overall trends in the data.
+
+### Implementation of Smoothing
+
+Here's how the smoothing function is implemented in the application:
+
+```javascript
+const smoothData = (data, windowSize) => {
+    const smoothed = [];
+    for (let i = 0; i < data.length; i++) {
+        const start = Math.max(0, i - Math.floor(windowSize / 2));
+        const end = Math.min(data.length, i + Math.floor(windowSize / 2) + 1);
+        const window = data.slice(start, end);
+        const average = window.reduce((sum, val) => sum + val, 0) / window.length;
+        smoothed.push(average);
+    }
+    return smoothed;
+};
+```
+
+The smoothing can be toggled on or off using a checkbox in the UI, providing flexibility to the user.
+
 ## Installation
 
 ### Prerequisites
@@ -95,6 +123,15 @@ console.log(`Cosine Similarity: ${similarity.toFixed(2)}`); // Output: Cosine Si
 
 2. Start typing in the terminal to input text and get vector embeddings. The results and plot will be saved as `embedding_plot.png` in the current directory.
 
+3. env file can be found in the project root directory with default settings
+
+```
+PORT=3000
+EMBEDDINGS_MODEL=nomic-embed-text
+EMBEDDINGS_BASE_URL=http://localhost:11434
+SMOOTH=TRUE
+```
+
 ### UI Usage
 
 ![Help](./assets/popup.png)
@@ -106,14 +143,12 @@ console.log(`Cosine Similarity: ${similarity.toFixed(2)}`); // Output: Cosine Si
 
    This will start the server with the default port 3000.
 
-2. Open index.html.
+2. Open `index.html`.
 
 3. Use the input field to type text and click "Submit" to generate vector embeddings. The results will be displayed on the graph, and you can interact with it to view similarities.
+
+4. **Smoothing Option**: Use the "Smooth" checkbox to toggle smoothing on or off for better visualization of the graph.
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE). See the LICENSE file for more details.
-
----
-
-Feel free to customize any part of this README as needed. This document should provide clear instructions and information about your project, making it easier for users to understand and get started with it.

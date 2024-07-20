@@ -62,7 +62,7 @@ rl.on('SIGINT', () => {
 async function plotAllQueries() {
     if (queries.length === 0) return;
 
-    const { data, layout } = renderPlot(queries, 0);
+    const { data, layout } = renderPlot(queries, 0, process.env.SMOOTH === 'true');
 
     const htmlContent = `
     <!DOCTYPE html>
