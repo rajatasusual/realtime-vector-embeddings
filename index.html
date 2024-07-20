@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vectors Simplified</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="input-section">
+            <div class="header">
+                <a href="https://github.com/rajatasusual/llamapp" target="_blank" title="Visit our GitHub repository">
+                    <img src="assets/llama.png" alt="A cute llama for llamapp" class="logo" />
+                </a>
+                <img src="assets/help.svg" alt="Help" class="help-icon" onclick="toggleHelpPopup()" />
+            </div>
+            <h1>Vectors Simplified</h1>
+            <input type="text" id="inputText" placeholder="Type your text here..." onkeydown="checkEnter(event)" />
+            <button onclick="submitText()" id="submitButton">Submit</button>
+            <div id="statusMessage" class="status-message"></div>
+            <div id="queryList" class="query-list"></div>
+        </div>
+        <div id="plot"></div>
+    </div>
+    <footer>
+        <a href="https://rajatasusual.github.io" title="Github profile" target="_blank">Created by Rajat</a>
+        |
+        <a href="https://www.github.com/rajatasusual/llamapp" title="Github repository" target="_blank">
+            <img src="assets/open source.png" alt="Github" class="icon">
+        </a>
+    </footer>
+
+    <div id="helpPopup" class="help-popup">
+        <div class="help-content">
+            <span class="close" onclick="toggleHelpPopup()">&times;</span>
+            <span class="close-btn" onclick="toggleHelpPopup()">&times;</span>
+            <h2>Help</h2>
+            <p><strong>Vectors:</strong> Vectors are mathematical objects used to represent data in multi-dimensional space. Each vector consists of multiple components or dimensions.</p>
+            <p><strong>Cosine Similarity:</strong> Cosine similarity is a measure used to calculate how similar two vectors are. It ranges from -1 (completely dissimilar) to 1 (completely similar). It is computed using the cosine of the angle between two vectors.</p>
+            <h3>Recommended Readings:</h3>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)" target="_blank">Vector (Mathematics and Physics)</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Cosine_similarity" target="_blank">Cosine Similarity</a></li>
+                <li><a href="https://towardsdatascience.com/cosine-similarity-in-machine-learning-4c78341a5a94" target="_blank">Cosine Similarity in Machine Learning (Towards Data Science)</a></li>
+            </ul>
+            <h2>How to Use This App</h2>
+            <ul>
+                <li>Type your text into the input field and press Enter or click Submit.</li>
+                <li>Your query and its vector embedding will be plotted on the graph.</li>
+                <li>Click on any query in the list to select it and see its cosine similarity with other queries.</li>
+                <li>Hover over the points on the graph to see the cosine similarity values.</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js" defer></script>
+    <script src="plot.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+
+</html>
