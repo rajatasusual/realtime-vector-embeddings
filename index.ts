@@ -4,6 +4,8 @@ import puppeteer from 'puppeteer';
 
 import { renderPlot } from './plot';
 
+import 'dotenv/config';
+
 // Initialize readline interface
 const rl = readline.createInterface({
     input: process.stdin,
